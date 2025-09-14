@@ -27,7 +27,7 @@
       ></v-select>
     </v-col>
 
-    <!-- Поле логина - растягивается при LDAP -->
+    <!-- Поле логина -->
     <v-col 
       :cols="account.type === 'Локальная' ? 3 : 6"
       :class="{'ldap-login-col': account.type === 'LDAP'}"
@@ -88,7 +88,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { Account } from '@/stores/accountStore';
-import './styles/AccountRow.scss';
+import '@/styles/AccountRow.scss';
 
 const props = defineProps<{
   account: Account & {

@@ -1,0 +1,23 @@
+.header-row {
+  margin-bottom: 20px;
+  align-items: center;
+  
+  .text-h5 {
+    margin: 0;
+    font-weight: 500;
+  }
+}
+.header-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header-container .text-h5 {
+  margin: 0;
+  font-weight: 500;
+}
+
+.header-container .v-btn {
+  margin-left: 12px; /* Отступ между текстом и кнопкой */
+}

@@ -26,7 +26,7 @@ import AccountHeader from './AccountHeader.vue';
 import AccountColumnHeaders from './AccountColumnHeaders.vue';
 import AccountRow from './AccountRow.vue';
 import NoAccountsAlert from './NoAccountsAlert.vue';
-import './styles/AccountForm.scss';
+import '@/styles/AccountForm.scss';
 
 const accountStore = useAccountStore();
 

@@ -18,5 +18,5 @@
 </template>
 
 <script setup lang="ts">
-import './styles/AccountColumnHeaders.scss';
+import '@/styles/AccountColumnHeaders.scss';
 </script>
