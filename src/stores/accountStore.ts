@@ -13,7 +13,7 @@ export const useAccountStore = defineStore('accounts', () => {
   const accounts = ref<Account[]>([]);
   const nextId = ref(1);
 
-  // Загрузка из localStorage при инициализации
+  // Загрузка из localStorage
   const loadFromStorage = () => {
     const savedData = localStorage.getItem('accountManagementData');
     if (savedData) {
@@ -31,7 +31,7 @@ export const useAccountStore = defineStore('accounts', () => {
     }));
   };
 
-  // Добавление новой учетной записи
+  // Добавление учетной записи
   const addAccount = (account: Omit<Account, 'id'>) => {
     const newAccount = { ...account, id: nextId.value++ };
     accounts.value.push(newAccount);
@@ -39,7 +39,7 @@ export const useAccountStore = defineStore('accounts', () => {
     return newAccount;
   };
 
-  // Обновление существующей учетной записи
+  // Обновление учетной записи
   const updateAccount = (id: number, updates: Partial<Account>) => {
     const index = accounts.value.findIndex(acc => acc.id === id);
     if (index !== -1) {
@@ -48,27 +48,51 @@ export const useAccountStore = defineStore('accounts', () => {
     }
   };
 
-  // Удаление учетной записи
-  const removeAccount = (id: number) => {
-    accounts.value = accounts.value.filter(acc => acc.id !== id);
-    saveToStorage();
-  };
+// Удаление учетной записи
+const removeAccount = (id: number) => {
+  accounts.value = accounts.value.filter(acc => acc.id !== id);
+  saveToStorage();
+};
 
-  // Преобразование строки меток в массив объектов
-  const parseLabels = (labelsString: string): { text: string }[] => {
-    return labelsString
-      .split(';')
-      .map(label => label.trim())
-      .filter(label => label.length > 0)
-      .map(text => ({ text }));
-  };
+  // Строки меток в массив объектов
+ const parseLabels = (labelsString: string): { text: string }[] => {
+  return labelsString
+    .split(';')
+    .map(label => label.trim())
+    .filter(label => label.length > 0) // Убираем пустые элементы
+    .map(text => ({ text }));
+};
 
-  // Преобразование массива объектов в строку меток
+  // Массив объектов в строку меток
   const formatLabels = (labels: { text: string }[]): string => {
     return labels.map(label => label.text).join('; ');
   };
 
-  // Загрузка данных при инициализации хранилища
+  // Валидация учетной записи
+  const validateAccount = (account: Partial<Account>): { isValid: boolean; errors: Record<string, string> } => {
+    const errors: Record<string, string> = {};
+
+    if (!account.login || account.login.trim().length === 0) {
+      errors.login = 'Логин обязателен для заполнения';
+    } else if (account.login.length > 100) {
+      errors.login = 'Логин не может превышать 100 символов';
+    }
+
+    if (account.type === 'Локальная') {
+      if (!account.password || account.password.trim().length === 0) {
+        errors.password = 'Пароль обязателен для локальных записей';
+      } else if (account.password.length > 100) {
+        errors.password = 'Пароль не может превышать 100 символов';
+      }
+    }
+
+    return {
+      isValid: Object.keys(errors).length === 0,
+      errors
+    };
+  };
+
+  // Загрузка данных при инициализации
   loadFromStorage();
 
   return {
@@ -77,6 +101,7 @@ export const useAccountStore = defineStore('accounts', () => {
     updateAccount,
     removeAccount,
     parseLabels,
-    formatLabels
+    formatLabels,
+    validateAccount
   };
 });

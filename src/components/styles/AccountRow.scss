@@ -6,13 +6,31 @@
   &:hover {
     background-color: #f5f5f5;
   }
+  
+
+  .v-text-field {
+    position: relative;
+    
+    .v-input__append {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      margin: 0;
+      padding: 0;
+    }
+    
+    .v-field__input {
+      padding-right: 40px; // место для иконки
+    }
+  }
 }
 
 .password-toggle {
   cursor: pointer;
+  font-size: 20px;
 }
 
-// Для полей ввода
 .v-text-field .v-field {
   background-color: white;
 }
@@ -26,6 +44,18 @@
   .account-row {
     .v-col {
       margin-bottom: 8px;
+    }
+
+    // На мобильных устройствах 
+    .v-text-field {
+      .v-input__append {
+        position: static;
+        transform: none;
+      }
+      
+      .v-field__input {
+        padding-right: 12px; // Стандартный отступ
+      }
     }
   }
 }
