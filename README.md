@@ -1,33 +1,68 @@
-# account-management-form
+# Форма управления учётными записями
 
-This template should help get you started developing with Vue 3 in Vite.
+## Стек технологий
 
-## Recommended IDE Setup
+- Vue.js 3 + Composition API
+- TypeScript 
+- Pinia (стейт-менеджер)
+- Vuetify (UI фреймворк)
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Функциональность
 
-## Type Support for `.vue` Imports in TS
+Приложение представляет собой форму для управления учётными записями с следующими возможностями:
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- Добавление новых учётных записей
+- Редактирование существующих записей  
+- Удаление записей
+- Валидация вводимых данных
+- Сохранение данных в локальное хранилище
+- Восстановление данных при перезагрузке страницы
 
-## Customize configuration
+## Структура проекта
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+```
+src/
+├── components/     # Vue компоненты
+├── styles/         # SCSS стили
+├── stores/         # Pinia хранилища
+├── assets/         # Статические ресурсы
+└── main.ts         # Точка входа приложения
+```
 
-## Project Setup
+## Настройка окружения
 
-```sh
+### Рекомендуемая среда разработки
+
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (отключите Vetur).
+
+### Поддержка TypeScript
+
+TypeScript по умолчанию не может обрабатывать информацию о типах для импортов `.vue`, поэтому мы заменяем CLI `tsc` на `vue-tsc` для проверки типов. В редакторах нам нужен [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar), чтобы служба языка TypeScript могла работать с типами `.vue`.
+
+## Установка и запуск
+
+```bash
+# Установка зависимостей
 npm install
-```
 
-### Compile and Hot-Reload for Development
-
-```sh
+# Запуск в режиме разработки
 npm run dev
-```
 
-### Type-Check, Compile and Minify for Production
-
-```sh
+# Сборка для production
 npm run build
+
+# Проверка типов TypeScript
+npm run type-check
 ```
+
+
+## Особенности реализации
+
+- Использование Composition API для лучшей организации кода
+- Строгая типизация с TypeScript
+- Глобальное состояние управления через Pinia
+- Адаптивный интерфейс с помощью Vuetify
+- Сохранение данных в localStorage
+- Валидация форм на стороне клиента
+
+Разработано с использованием современного стека Vue.js технологий.
