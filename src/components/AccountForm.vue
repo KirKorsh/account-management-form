@@ -30,9 +30,9 @@ import '@/styles/AccountForm.scss';
 
 const accountStore = useAccountStore();
 
-interface LocalAccount extends Omit<Account, 'labels'> {
+interface LocalAccount extends Account {
   localLabels: string;
-  errors: { [key: string]: boolean }; // Изменяем тип ошибок на boolean
+  errors: { [key: string]: boolean };
 }
 
 const localAccounts = ref<LocalAccount[]>([]);
@@ -178,7 +178,7 @@ const validateAccount = (id: number) => {
   if (accountIndex === -1) return;
 
   const account = localAccounts.value[accountIndex];
-  const errors: { [key: string]: boolean } = {}; // Изменяем на boolean для отслеживания только наличия ошибки
+  const errors: { [key: string]: boolean } = {};
   
   // Проверяем логин
   if (!account.login || account.login.trim().length === 0) {
@@ -203,7 +203,6 @@ const validateAccount = (id: number) => {
   
   localAccounts.value[accountIndex].errors = errors;
 };
-
 
 // Удаление учетной записи
 const removeAccount = (id: number) => {
